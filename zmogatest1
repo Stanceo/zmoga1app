@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инфографика: Эффекты Хлорогеновой Кислоты</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Narrative Plan: The infographic follows a logical narrative flow designed for easy digestion. It starts with a high-impact introduction ("What is CGA?"), immediately followed by the core data on its most concentrated source (coffee) and its degradation through roasting. Next, it explains the "How" through a simplified diagram of the three key molecular mechanisms. The centerpiece is the "Clinical Evidence" section, visualizing the most robust data (blood pressure, weight loss) with charts and large numbers. The infographic then broadens the scope by comparing CGA content across various foods and concludes with practical dosing information. This structure moves from general knowledge to specific data, making the complex topic accessible. -->
+    <!-- Visualization Choices: 
+        - Data Point: CGA content reduction due to roasting -> Goal: Compare -> Chosen Viz: Side-by-side "Big Number" cards (HTML/CSS) -> Justification: Creates a dramatic and instantly understandable visual contrast of the core takeaway about coffee.
+        - Data Point: Blood pressure reduction -> Goal: Compare -> Chosen Viz: Vertical Bar Chart (Chart.js/Canvas) -> Justification: Effectively compares the two related metrics (systolic vs. diastolic) from the meta-analysis.
+        - Data Point: Weight loss effect -> Goal: Inform -> Chosen Viz: Single "Big Number" stat (HTML/CSS) -> Justification: Highlights the key quantitative result from the meta-analysis in a highly scannable format.
+        - Data Point: Molecular Mechanisms (Nrf2, NF-κB, AMPK) -> Goal: Organize -> Chosen Viz: Three-column diagram with Unicode icons (HTML/CSS) -> Justification: Breaks down a complex biological process into a simple, high-level flowchart without using prohibited SVG or Mermaid JS.
+        - Data Point: CGA content across various food sources -> Goal: Compare/Rank -> Chosen Viz: Horizontal Bar Chart (Chart.js/Canvas) -> Justification: Best for comparing multiple categories with long labels, providing a clear ranking of sources. Label wrapping is essential and implemented.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .horizontal-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 450px;
+            max-height: 500px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+            .horizontal-chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-[#CC333F] uppercase tracking-wide">Хлорогеновая Кислота</h1>
+            <p class="mt-4 text-xl md:text-2xl font-bold text-gray-700">Ключевые факты о полифеноле из вашего кофе (и не только)</p>
+        </header>
+
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Что такое ХГК и почему важна обжарка?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center border-t-8 border-[#00A0B0]">
+                    <p class="text-lg font-semibold">Содержание в ЗЕЛЕНЫХ зернах кофе</p>
+                    <p class="text-5xl md:text-7xl font-black text-[#00A0B0] my-4">~48,000</p>
+                    <p class="font-semibold">мг/кг</p>
+                    <p class="text-sm text-gray-500 mt-2">Зеленые кофейные зерна — самый концентрированный источник ХГК, что делает их экстракт основой для добавок.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center border-t-8 border-[#EB6841]">
+                    <p class="text-lg font-semibold">Содержание в ОБЖАРЕННЫХ зернах кофе</p>
+                    <p class="text-5xl md:text-7xl font-black text-[#EB6841] my-4">~3,000</p>
+                    <p class="font-semibold">мг/кг</p>
+                    <p class="text-sm text-gray-500 mt-2">Обжарка разрушает до 95% ХГК, значительно снижая ее содержание в вашей чашке кофе.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 md:mb-16 bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Как она работает? Три ключевых механизма</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="p-4 rounded-lg bg-blue-50">
+                    <p class="text-5xl mb-2">🛡️</p>
+                    <h3 class="font-bold text-lg text-blue-800">Активация Nrf2</h3>
+                    <p class="text-sm text-gray-600">Повышает внутреннюю антиоксидантную защиту клеток, борясь с окислительным стрессом — причиной старения.</p>
+                </div>
+                <div class="p-4 rounded-lg bg-red-50">
+                    <p class="text-5xl mb-2">🔥</p>
+                    <h3 class="font-bold text-lg text-red-800">Подавление NF-κB</h3>
+                    <p class="text-sm text-gray-600">Снижает хроническое воспаление, которое лежит в основе многих заболеваний, от проблем с печенью до кожи.</p>
+                </div>
+                <div class="p-4 rounded-lg bg-green-50">
+                    <p class="text-5xl mb-2">⚖️</p>
+                    <h3 class="font-bold text-lg text-green-800">Активация AMPK</h3>
+                    <p class="text-sm text-gray-600">Регулирует энергетический баланс, улучшая метаболизм глюкозы и жиров. Ключ к пользе при диабете и ожирении.</p>
+                </div>
+            </div>
+            <p class="text-center text-xs text-gray-500 mt-6">ХГК действует как "главный переключатель", восстанавливая баланс в фундаментальных системах организма.</p>
+        </section>
+
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Доказательства в цифрах: клинические эффекты</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-center mb-4">Влияние на артериальное давление</h3>
+                    <div class="chart-container">
+                        <canvas id="bloodPressureChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center mt-4 text-gray-600">Метаанализ показал статистически значимое, хотя и умеренное, снижение давления при приеме ХГК.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col justify-center items-center text-center">
+                    <h3 class="font-bold text-xl mb-4">Эффект на массу тела</h3>
+                     <div class="my-4">
+                        <span class="text-8xl font-black text-[#CC333F]">-1.3</span>
+                        <span class="text-4xl font-bold text-gray-700 ml-2">кг</span>
+                     </div>
+                    <p class="text-sm text-gray-600 max-w-xs">Прием экстракта зеленых кофейных зерен (≥500 мг ХГК в день) показал в среднем такое снижение веса по сравнению с плацебо.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-12 md:mb-16 bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Где еще содержится ХГК?</h2>
+             <p class="text-center text-gray-600 mb-6 -mt-4">Сравнение содержания в различных пищевых источниках (мг/кг).</p>
+            <div class="horizontal-chart-container">
+                <canvas id="foodSourceChart"></canvas>
+            </div>
+            <p class="text-center text-xs text-gray-500 mt-4">Кофе — не единственный источник, но концентрация в зеленых зернах и чае мате не имеет себе равных.</p>
+        </section>
+
+        <section class="text-center">
+             <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Дозировки и безопасность</h2>
+             <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-[#EB6841] text-white p-4 rounded-lg shadow-md flex-grow">
+                    <p class="font-bold">Контроль веса</p>
+                    <p class="text-2xl font-black">≥ 500 мг/день</p>
+                </div>
+                <div class="bg-[#00A0B0] text-white p-4 rounded-lg shadow-md flex-grow">
+                    <p class="font-bold">Здоровье сердца</p>
+                    <p class="text-2xl font-black">120-300 мг/день</p>
+                </div>
+                 <div class="bg-[#EDC951] text-gray-800 p-4 rounded-lg shadow-md flex-grow">
+                    <p class="font-bold">Контроль глюкозы</p>
+                    <p class="text-2xl font-black">до 1000 мг/день</p>
+                </div>
+             </div>
+             <p class="text-sm text-gray-600 mt-6 max-w-2xl mx-auto">ХГК в целом безопасна, но высокие дозы могут влиять на уровень гомоцистеина. Побочные эффекты от экстрактов обычно связаны с кофеином.</p>
+        </section>
+
+    </div>
+
+<script>
+    function wrapLabels(label, maxWidth) {
+        const words = label.split(' ');
+        let lines = [];
+        let currentLine = words[0];
+
+        for (let i = 1; i < words.length; i++) {
+            if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                lines.push(currentLine);
+                currentLine = words[i];
+            } else {
+                currentLine += ' ' + words[i];
+            }
+        }
+        lines.push(currentLine);
+        return lines;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const bpCtx = document.getElementById('bloodPressureChart')?.getContext('2d');
+        if (bpCtx) {
+            new Chart(bpCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Систолическое (верхнее)', 'Диастолическое (нижнее)'],
+                    datasets: [{
+                        label: 'Снижение (мм рт. ст.)',
+                        data: [4.31, 3.68],
+                        backgroundColor: ['#EB6841', '#EDC951'],
+                        borderColor: ['#CC333F', '#6A4A3C'],
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: { title: tooltipTitleCallback }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Снижение (мм рт. ст.)', font: { weight: 'bold' } }
+                        },
+                        x: { ticks: { font: { size: 14 } } }
+                    }
+                }
+            });
+        }
+
+        const foodCtx = document.getElementById('foodSourceChart')?.getContext('2d');
+        if (foodCtx) {
+            const rawLabels = [
+                'Зеленые кофейные зерна',
+                'Чай мате',
+                'Листья сладкого картофеля',
+                'Баклажан',
+                'Растворимый кофе',
+                'Семена подсолнечника',
+                'Обжаренный кофе'
+            ];
+            
+            new Chart(foodCtx, {
+                type: 'bar',
+                data: {
+                    labels: rawLabels.map(label => wrapLabels(label, 16)),
+                    datasets: [{
+                        label: 'Содержание ХГК (мг/кг)',
+                        data: [48035, 14850, 9600, 6515, 7125, 800, 3055],
+                        backgroundColor: [
+                            '#00A0B0', '#6A4A3C', '#CC333F', '#EB6841', 
+                            '#EDC951', '#A3A948', '#8A9A5B'
+                        ],
+                        borderWidth: 0,
+                        borderRadius: 3,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: { title: tooltipTitleCallback }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                             title: { display: true, text: 'мг/кг (логарифмическая шкала)', font: { weight: 'bold' } },
+                            type: 'logarithmic',
+                        },
+                        y: { ticks: { font: { size: 12 } } }
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
